@@ -701,32 +701,146 @@
         </div>
 
         <!--content current page of card manager-->
-        <div class="content current_page_action hidden"  data-page-name="manager">
-            <h3>&nbsp;Manager</h3>
-
+        <div class="content current_page_action hidden" data-page-name="manage_manager">
+            <h3>&nbsp;Manager/Manage Manager</h3>
+            <div class="container">
+                <div class="header">
+                    <button class="add-button" data-page-name="add_manager" onclick="setActive(this)">Add +</button>
+                </div>
+        
+                <!-- Table to Show Existing Managers -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Manager Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Manager ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for manager in managers %}
+                        <tr>
+                            <td>{{ manager.Sno }}</td>
+                            <td>{{ manager.manager_name }}</td>
+                            <td>{{ manager.email }}</td>
+                            <td>{{ manager.phone }}</td>
+                            <td>{{ manager.manager_id }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <!--content current page of  sidebar add manager-->
-        <div class="content current_page_action hidden"  data-page-name="add_manager">
-          <h3>&nbsp;manager/add manager</h3>
+        
 
+        <!--content current page of  sidebar add manager-->
+        <div class="content current_page_action hidden" data-page-name="add_manager">
+            <h3>&nbsp;Manager/Add Manager</h3>
+            <div class="container">
+                <div class="title">Manage Manager</div>
+                <form method="POST" action="{% url 'add_manager' %}">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="manager-name">Manager Name</label>
+                            <input type="text" name="manager_name" id="manager-name" placeholder="Enter Manager Name" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" placeholder="Enter Email" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="phone">Phone</label>
+                            <input type="text" name="phone" id="phone" placeholder="Enter Phone Number">
+                        </div>
+                        <div class="input-group">
+                            <label for="manager-id">Manager ID</label>
+                            <input type="text" name="manager_id" id="manager-id" placeholder="Enter Manager ID" required>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button type="submit" class="save-btn">Save</button>
+                    </div>
+                </form>
+            </div>
         </div>
        
         <!--content current page of  sidebar manage employee-->
-        <div class="content current_page_action hidden"  data-page-name="manage_emp">
-            <h3>&nbsp;Employee/Manage Emp</h3>
+        <div class="content current_page_action hidden" data-page-name="manage_employee">
+            <h3>&nbsp;Employee/Manage Employee</h3>
             <div class="container">
                 <div class="header">
-                      <button class="add-button">Add +</button>
+                    <button class="add-button" data-page-name="add_employee" onclick="setActive(this)">Add +</button>
                 </div>
-
+        
+                <!-- Table to Show Existing Employees -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Employee Name</th>
+                            <th>Email</th>
+                            <th>Employee ID</th>
+                            <th>Phone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for employee in employees %}
+                        <tr>
+                            <td>{{ employee.Sno }}</td>
+                            <td>{{ employee.employee_name }}</td>
+                            <td>{{ employee.email }}</td>
+                            <td>{{ employee.employee_id }}</td>
+                            <td>{{ employee.phone }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <!--content current page of sidebar add employee-->
-        <div class="content current_page_action hidden"  data-page-name="add_employee">
-          <h3>&nbsp;Employee/Add Employee</h3>
-
+        <!-- Add Employee Section -->
+        <div class="content current_page_action hidden" data-page-name="add_employee">
+    <h3>&nbsp;Employee/Add Employee</h3>
+    <div class="container">
+        <div class="title">Manage Employee</div>
+        <form method="POST" action="{% url 'add_employee' %}">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="employee-name">Employee Name</label>
+                    <input type="text" name="employee_name" id="employee-name" placeholder="Enter Employee Name" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" name="email" id="email" placeholder="Enter Email" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Enter Password" required>
+                </div>
+                <div class="input-group">
+                    <label for="phone">Phone No.</label>
+                    <input type="text" name="phone" id="phone" placeholder="Enter Phone No.">
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="employee-id">Employee ID</label>
+                <input type="text" name="employee_id" id="employee-id" placeholder="Enter Employee ID" required>
+            </div>
+            <div class="buttons">
+                <button type="submit" class="save-btn">Save</button>
+            </div>
+        </form>
+    </div>
         </div>
+
 
         <!--content current page of card active user-->
         <div class="content current_page_action hidden"  data-page-name="active_users">
@@ -735,339 +849,220 @@
         </div>
           
           <!--content current page of sidebar manage user-->
-        <div class="content current_page_action hidden"  data-page-name="manage_user" >
-        <h3>&nbsp;User/Manage User</h3>
-
+          <div class="content current_page_action hidden" data-page-name="manage_user">
+            <h3>&nbsp;User/Manage User</h3>
+            <div class="container">
+                <div class="header">
+                    <button class="add-button" data-page-name="add_user" onclick="setActive(this)">Add +</button>
+                </div>
+        
+                <!-- Table to Show Existing Users -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>User ID</th>
+                            <th>Phone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td>{{ user.Sno }}</td>
+                            <td>{{ user.user_name }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.user_id }}</td>
+                            <td>{{ user.phone }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
+        
 
          <!--content current page of sidebar add user-->
-        <div class="content current_page_action hidden"  data-page-name="add_user">
-          <h3>&nbsp;user/Add user</h3>
-          <div class="container">
-              <div class="title">Manage Manager</div>
-              <div class="form-row">
-                  <div class="input-group">
-                      <label for="manager-name">Manager Name</label>
-                      <input type="text" id="manager-name" placeholder="Enter Admin name">
-                  </div>
-                  <div class="input-group">
-                      <label for="email">Email Address</label>
-                      <input type="email" id="email" placeholder="Enter Email">
-                  </div>
-              </div>
-              <div class="form-row">
-                  <div class="input-group">
-                      <label for="password">Password</label>
-                      <input type="password" id="password" placeholder="Enter Password">
-                  </div>
-                  <div class="input-group">
-                      <label for="phone">Phone No.</label>
-                      <input type="text" id="phone" placeholder="Enter phone no.">
-                  </div>
-              </div>
-              <div class="input-groupp" style="margin-bottom: 20px;">
-                  <label for="manager-id">Manager ID</label>
-                  <input type="text" id="manager-id" placeholder="Enter Manager ID">
-              </div>
-              <div class="buttons">
-                  <button class="save-btn">Save</button>
-              </div>
-          </div>
-      </div>
-      
+         <div class="content current_page_action hidden" data-page-name="add_user">
+            <h3>&nbsp;User/Add User</h3>
+            <div class="container">
+                <div class="title">Manage User</div>
+                <form method="POST" action="{% url 'add_user' %}">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="user-name">User Name</label>
+                            <input type="text" name="user_name" id="user-name" placeholder="Enter User name" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" name="email" id="email" placeholder="Enter Email" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password" placeholder="Enter Password" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="phone">Phone No.</label>
+                            <input type="text" name="phone" id="phone" placeholder="Enter Phone No.">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="user-id">User ID</label>
+                        <input type="text" name="user_id" id="user-id" placeholder="Enter User ID" required>
+                    </div>
+                    <div class="buttons">
+                        <button type="submit" class="save-btn">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
        <!--content current page of sidebar manage students-->
-      <div class="content current_page_action hidden"  data-page-name="manage_student">
+       <div class="content current_page_action hidden" data-page-name="manage_student">
         <h3>&nbsp;Student/Manage Student</h3>
         <div class="container">
             <div class="header">
-                  <button class="add-button">Add +</button>
+                <button class="add-button" data-page-name="add_student" onclick="setActive(this)">Add +</button>
             </div>
+    
+            <!-- Table to Show Existing Students -->
             <table>
-              <thead>
-                <tr>
-                  <th>S.No</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Password</th>
-                  <th>Admin Code</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>mona</td>
-                  <td>mona@example.com</td>
-                  <td>password123</td>
-                  <td>ADM001</td>
-                  <td class="action-buttons">
-                    <a href="#" class="edit-icon"></a>
-                    <a href="#" class="delete-icon"></a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>MONA SINGH</td>
-                  <td>mona2021cs146@abesit.edu.in</td>
-                  <td>password456</td>
-                  <td>SPC002</td>
-                  <td class="action-buttons">
-                    <a href="#" class="edit-icon"></a>
-                    <a href="#" class="delete-icon"></a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>divyansh</td>
-                  <td>divyansh@gmaail.com</td>
-                  <td>pass789</td>
-                  <td>SPC003</td>
-                  <td class="action-buttons">
-                    <a href="#" class="edit-icon"></a>
-                    <a href="#" class="delete-icon"></a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>monad</td>
-                  <td>monad@gmail.com</td>
-                  <td>monadpass</td>
-                  <td>ADM004</td>
-                  <td class="action-buttons">
-                    <a href="#" class="edit-icon"></a>
-                    <a href="#" class="delete-icon"></a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>sona</td>
-                  <td>sona@gmail.com</td>
-                  <td>sonapass</td>
-                  <td>GST005</td>
-                  <td class="action-buttons">
-                    <a href="#" class="edit-icon"></a>
-                    <a href="#" class="delete-icon"></a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td>shubham</td>
-                  <td>shub@gmail.com</td>
-                  <td>shubpass</td>
-                  <td>ADM006</td>
-                  <td class="action-buttons">
-                    <a href="#" class="edit-icon"></a>
-                    <a href="#" class="delete-icon"></a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td>student</td>
-                  <td>stud@gmail.com</td>
-                  <td>studpass</td>
-                  <td>SPC007</td>
-                  <td class="action-buttons">
-                    <a href="#" class="edit-icon"></a>
-                    <a href="#" class="delete-icon"></a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>8</td>
-                  <td>priyanshu</td>
-                  <td>priyanshu@iadhik</td>
-                  <td>priyanpass</td>
-                  <td>SPC008</td>
-                  <td class="action-buttons">
-                    <a href="#" class="edit-icon"></a>
-                    <a href="#" class="delete-icon"></a>
-                  </td>
-                </tr>
-              </tbody>
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Student Name</th>
+                        <th>Email</th>
+                        <th>Student ID</th>
+                        <th>Registration Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td>{{ student.Sno }}</td>
+                        <td>{{ student.student_name }}</td>
+                        <td>{{ student.email }}</td>
+                        <td>{{ student.student_id }}</td>
+                        <td>{{ student.registration_date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
             </table>
         </div>
-        </div>
-
+    </div>
+    
          <!--content current page of sidebar add students-->
-        <div class="content current_page_action hidden"  data-page-name="add_student">
-          <h3>&nbsp;Student/Add student</h3>
-          <div class="container">
-              <div class="title">Manage Manager</div>
-              <div class="form-row">
-                  <div class="input-group">
-                      <label for="manager-name">Manager Name</label>
-                      <input type="text" id="manager-name" placeholder="Enter Admin name">
-                  </div>
-                  <div class="input-group">
-                      <label for="email">Email Address</label>
-                      <input type="email" id="email" placeholder="Enter Email">
-                  </div>
-              </div>
-              <div class="form-row">
-                  <div class="input-group">
-                      <label for="password">Password</label>
-                      <input type="password" id="password" placeholder="Enter Password">
-                  </div>
-                  <div class="input-group">
-                      <label for="phone">Phone No.</label>
-                      <input type="text" id="phone" placeholder="Enter phone no.">
-                  </div>
-              </div>
-              <div class="input-groupp" style="margin-bottom: 20px;">
-                  <label for="manager-id">Manager ID</label>
-                  <input type="text" id="manager-id" placeholder="Enter Manager ID">
-              </div>
-              <div class="buttons">
-                  <button class="save-btn">Save</button>
-              </div>
-          </div>
-      </div>
+         <div class="content current_page_action hidden" data-page-name="add_student">
+            <h3>&nbsp;Student/Add Student</h3>
+            <div class="container">
+                <div class="title">Manage Student</div>
+                <form method="POST" action="{% url 'add_student' %}">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="student-name">Student Name</label>
+                            <input type="text" name="student_name" id="student-name" placeholder="Enter Student name" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" name="email" id="email" placeholder="Enter Email" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password" placeholder="Enter Password" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="registration-date">Registration Date</label>
+                            <input type="text" name="registration_date" id="registration-date" placeholder="Enter Registration Date">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="student-id">Student ID</label>
+                        <input type="text" name="student_id" id="student-id" placeholder="Enter Student ID" required>
+                    </div>
+                    <div class="buttons">
+                        <button type="submit" class="save-btn">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
 
        <!--content current page of sidebar manage college-->
-      <div class="content current_page_action hidden"  data-page-name="manage_college">
-        <h3>&nbsp;College/Manage college</h3>
+       <div class="content current_page_action hidden" data-page-name="manage_college">
+        <h3>&nbsp;College/Manage College</h3>
         <div class="container">
             <div class="header">
-                  <button class="add-button">Add +</button>
+                <button class="add-button" data-page-name="add_college" onclick="setActive(this)">Add +</button>
             </div>
+    
+            <!-- Table to Show Existing Colleges -->
             <table>
-              <thead>
-                <tr>
-                  <th>S.No</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Password</th>
-                  <th>Admin Code</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>mona</td>
-                  <td>mona@example.com</td>
-                  <td>password123</td>
-                  <td>ADM001</td>
-                  <td class="action-buttons">
-                    <a href="#" class="edit-icon"></a>
-                    <a href="#" class="delete-icon"></a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>MONA SINGH</td>
-                  <td>mona2021cs146@abesit.edu.in</td>
-                  <td>password456</td>
-                  <td>SPC002</td>
-                  <td class="action-buttons">
-                    <a href="#" class="edit-icon"></a>
-                    <a href="#" class="delete-icon"></a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>divyansh</td>
-                  <td>divyansh@gmaail.com</td>
-                  <td>pass789</td>
-                  <td>SPC003</td>
-                  <td class="action-buttons">
-                    <a href="#" class="edit-icon"></a>
-                    <a href="#" class="delete-icon"></a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>monad</td>
-                  <td>monad@gmail.com</td>
-                  <td>monadpass</td>
-                  <td>ADM004</td>
-                  <td class="action-buttons">
-                    <a href="#" class="edit-icon"></a>
-                    <a href="#" class="delete-icon"></a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>sona</td>
-                  <td>sona@gmail.com</td>
-                  <td>sonapass</td>
-                  <td>GST005</td>
-                  <td class="action-buttons">
-                    <a href="#" class="edit-icon"></a>
-                    <a href="#" class="delete-icon"></a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td>shubham</td>
-                  <td>shub@gmail.com</td>
-                  <td>shubpass</td>
-                  <td>ADM006</td>
-                  <td class="action-buttons">
-                    <a href="#" class="edit-icon"></a>
-                    <a href="#" class="delete-icon"></a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td>student</td>
-                  <td>stud@gmail.com</td>
-                  <td>studpass</td>
-                  <td>SPC007</td>
-                  <td class="action-buttons">
-                    <a href="#" class="edit-icon"></a>
-                    <a href="#" class="delete-icon"></a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>8</td>
-                  <td>priyanshu</td>
-                  <td>priyanshu@iadhik</td>
-                  <td>priyanpass</td>
-                  <td>SPC008</td>
-                  <td class="action-buttons">
-                    <a href="#" class="edit-icon"></a>
-                    <a href="#" class="delete-icon"></a>
-                  </td>
-                </tr>
-              </tbody>
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>College Name</th>
+                        <th>Location</th>
+                        <th>Contact</th>
+                        <th>College ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for college in colleges %}
+                    <tr>
+                        <td>{{ college.Sno }}</td>
+                        <td>{{ college.college_name }}</td>
+                        <td>{{ college.location }}</td>
+                        <td>{{ college.contact }}</td>
+                        <td>{{ college.college_id }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
             </table>
         </div>
-        </div>
+    </div>
 
          <!--content current page of sidebar add college-->
-        <div class="content current_page_action hidden"  data-page-name="add_college">
-          <h3>&nbsp;College/Add college</h3>
-          <div class="container">
-              <div class="title">Manage Manager</div>
-              <div class="form-row">
-                  <div class="input-group">
-                      <label for="manager-name">Manager Name</label>
-                      <input type="text" id="manager-name" placeholder="Enter Admin name">
-                  </div>
-                  <div class="input-group">
-                      <label for="email">Email Address</label>
-                      <input type="email" id="email" placeholder="Enter Email">
-                  </div>
-              </div>
-              <div class="form-row">
-                  <div class="input-group">
-                      <label for="password">Password</label>
-                      <input type="password" id="password" placeholder="Enter Password">
-                  </div>
-                  <div class="input-group">
-                      <label for="phone">Phone No.</label>
-                      <input type="text" id="phone" placeholder="Enter phone no.">
-                  </div>
-              </div>
-              <div class="input-groupp" style="margin-bottom: 20px;">
-                  <label for="manager-id">Manager ID</label>
-                  <input type="text" id="manager-id" placeholder="Enter Manager ID">
-              </div>
-              <div class="buttons">
-                  <button class="save-btn">Save</button>
-              </div>
-          </div>
-      </div>
+         <div class="content current_page_action hidden" data-page-name="add_college">
+            <h3>&nbsp;College/Add College</h3>
+            <div class="container">
+                <div class="title">Manage College</div>
+                <form method="POST" action="{% url 'add_college' %}">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="college-name">College Name</label>
+                            <input type="text" name="college_name" id="college-name" placeholder="Enter College Name" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="location">Location</label>
+                            <input type="text" name="location" id="location" placeholder="Enter Location">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="contact">Contact</label>
+                            <input type="text" name="contact" id="contact" placeholder="Enter Contact">
+                        </div>
+                        <div class="input-group">
+                            <label for="college-id">College ID</label>
+                            <input type="text" name="college_id" id="college-id" placeholder="Enter College ID" required>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button type="submit" class="save-btn">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
 
        <!--content current page of sidebar manage questions-->
       <div class="content current_page_action hidden"  data-page-name="manage_question">

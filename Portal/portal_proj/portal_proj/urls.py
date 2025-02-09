@@ -19,13 +19,18 @@ from django.urls import path
 from system.views import *
 
 urlpatterns = [
-    path('', user_login, name='home'), 
+    # path('', user_login, name='home'), 
     path('admin/', admin.site.urls),
     path('login/', user_login, name='login'),
     path('logout/', user_logout, name='logout'),
     # path('dashboard_view/', dashboard_view, name='dashboard'),
     path('add-admin/', add_admin, name='add_admin'),
-    path('dashboard/', dashboard, name='dashboard'),
+    path('', dashboard, name='dashboard'),
     path('add-admin/', add_admin, name='add_admin'),
+    path('users/add/', add_user, name='add_user'),
+    path('students/add/', add_student, name='add_student'),
+    path('colleges/add/', add_college, name='add_college'),
+    path('add_employee/', add_employee, name='add_employee'),
+    path('add_manager/', add_manager, name='add_manager'),
 
 ]
